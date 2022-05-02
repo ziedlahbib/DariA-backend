@@ -3,9 +3,13 @@ package tn.esprit.spring.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.entities.FileDB;
 import tn.esprit.spring.entities.Annonce;
+import tn.esprit.spring.entities.User;
 import tn.esprit.spring.repository.AnnonceRepository;
-
+import tn.esprit.spring.repository.FileDBRepository;
+import tn.esprit.spring.repository.UserRepository;
+import tn.esprit.spring.services.UserService;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,6 +18,11 @@ public class AnnonceServiceImpl implements AnnonceService  {
 	
 	@Autowired
     private AnnonceRepository annonceRepository;
+	@Autowired
+    private UserRepository userRepository;
+	
+	@Autowired
+	FileDBRepository filedbrepo;
   
     // save operation
     @Override
@@ -54,6 +63,30 @@ public class AnnonceServiceImpl implements AnnonceService  {
     public void deleteAnnonceById(Long annonceId) {
         annonceRepository.deleteById(annonceId);
     }
+
+	@Override
+	public Annonce retrieveAnnonce(Long id) {
+		
+		return annonceRepository.findById(id).get();
+	}
+
+	@Override
+	public Annonce retrieveAnnonce(String titre) {
+		
+		return annonceRepository.findByTitre(titre);
+	} 
+	@Override
+	public void affecterFileToAnnonce(Long idFiles, Long idTrip) {
+		Annonce t=annonceRepository.findById(idTrip).orElse(null);
+		
+			FileDB f=filedbrepo.findById(idFiles).orElse(null);
+			t.setFiles(f);
+			annonceRepository.save(t);
+		
+		
+	}
+
+
   
 }
 	

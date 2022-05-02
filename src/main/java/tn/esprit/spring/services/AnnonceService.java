@@ -17,4 +17,14 @@ public interface AnnonceService {
 
 	// delete operation
 	void deleteAnnonceById(Long annonceId);
+	
+	// filtrage  by id 
+	Annonce retrieveAnnonce(Long id);
+	
+	//filtrage by titre
+	Annonce retrieveAnnonce(String titre);
+	
+	public void affecterFileToAnnonce(Long idFiles, Long idAnnonce);
+	
+	
 }
