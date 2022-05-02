@@ -50,7 +50,7 @@ public class AnnonceServiceImpl implements AnnonceService  {
         }
   
         if (Objects.nonNull(annonce.getDescription()) && !"".equalsIgnoreCase(annonce.getDescription())) {
-            annonceDB.setTitre(annonce.getDescription());
+            annonceDB.setDescription(annonce.getDescription());
         }
   
         
